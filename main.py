@@ -7,42 +7,42 @@ class Pawn:
     def __init__(self, onBoard, isWhite: bool = True) -> None:
         self.onBoard = onBoard
         self.isWhite = isWhite
-        self.icon = "♟" if isWhite else "♙"
+        self.icon = '\033[97m♟\033[0m' if isWhite else '\033[30m♟\033[0m'
 
 
 class Rook:
     def __init__(self, onBoard, isWhite: bool = True) -> None:
         self.onBoard = onBoard
         self.isWhite = isWhite
-        self.icon = "♜" if isWhite else "♖"
+        self.icon = '\033[97m♜\033[0m' if isWhite else '\033[30m♜\033[0m'
 
 
 class Knight:
     def __init__(self, onBoard, isWhite: bool = True) -> None:
         self.onBoard = onBoard
         self.isWhite = isWhite
-        self.icon = "♞" if isWhite else "♘"
+        self.icon = '\033[97m♞\033[0m' if isWhite else '\033[30m♞\033[0m'
 
 
 class Bishop:
     def __init__(self, onBoard, isWhite: bool = True) -> None:
         self.onBoard = onBoard
         self.isWhite = isWhite
-        self.icon = "♝" if isWhite else "♗"
+        self.icon = '\033[97m♝\033[0m' if isWhite else '\033[30m♝\033[0m'
 
 
 class Queen:
     def __init__(self, onBoard, isWhite: bool = True) -> None:
         self.onBoard = onBoard
         self.isWhite = isWhite
-        self.icon = "♛" if isWhite else "♕"
+        self.icon = '\033[97m♛\033[0m' if isWhite else '\033[30m♛\033[0m'
 
 
 class King:
     def __init__(self, onBoard, isWhite: bool = True) -> None:
         self.onBoard = onBoard
         self.isWhite = isWhite
-        self.icon = "♚" if isWhite else "♔"
+        self.icon = '\033[97m♚\033[0m' if isWhite else '\033[30m♚\033[0m'
 
 
 class ChessBoard:
@@ -225,7 +225,7 @@ class ChessBoard:
                             self.isWhiteTurn = not self.isWhiteTurn
                             return True
             return False
-
+            
         if algebraicNotation[0].islower():  # a pawn is being moved
             return pawnMove()
         elif algebraicNotation[0] == "N":  # a Knight is being moved
@@ -244,6 +244,6 @@ class ChessBoard:
         print("\n   a b c d e f g h")
 
 
-board = ChessBoard(emptyIcon=' ')
+board = ChessBoard(emptyIcon= '\033[32m\u2022\033[0m')
 print(board.move("Kf3"))
 board.print()
