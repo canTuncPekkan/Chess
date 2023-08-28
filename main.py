@@ -263,3 +263,4 @@ moves = ["f4", "e5", "fxe5", "f6", "d4", "fxe5","dxe5"]
 for i in moves:
     print(board.move(i))
     board.print()
+    
