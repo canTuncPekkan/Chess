@@ -58,7 +58,7 @@ class ChessBoard:
         self,
         FEN: str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
         isWhiteTurn: bool = True,
-        emptyIcon: chr = "_",
+        emptyIcon: chr = " ",
     ) -> None:
         charToObj = {
             "p": Pawn,
@@ -119,10 +119,24 @@ class ChessBoard:
                 3) Pawn Premote
                 4) add enpasant
             BUG:
-                1) king being threthened by pawn creats a new dictnary key causing the pawn to go to the 3th dimention DONE
-
+                1) king being threthened by pawn creats a new dictnary key causing the pawn to go to the 3th dimention FIXED
+                2) you are able to take  with pawn any peice that is one line abowe FIXED
             """
             if algebraicNotation.find("x") > 0:  # the pawn is taking another peace
+                temp = 2
+                try:
+                    if self.x[self.x.index(algebraicNotation[0]) + 1] != algebraicNotation[2]:
+                        temp -= 1
+                except IndexError:
+                    pass
+                try:
+                    if self.x[self.x.index(algebraicNotation[0]) - 1] != algebraicNotation[2]:
+                        temp -= 1
+                except IndexError:
+                    pass
+                if temp == 0:
+                    return False
+                
                 if self.isWhiteTurn:  # White to play
                     if (
                         type(self.cords[algebraicNotation[2:4]]) != King
@@ -225,7 +239,7 @@ class ChessBoard:
                             self.isWhiteTurn = not self.isWhiteTurn
                             return True
             return False
-            
+
         if algebraicNotation[0].islower():  # a pawn is being moved
             return pawnMove()
         elif algebraicNotation[0] == "N":  # a Knight is being moved
@@ -245,5 +259,7 @@ class ChessBoard:
 
 
 board = ChessBoard(emptyIcon= '\033[32m\u2022\033[0m')
-print(board.move("Kf3"))
-board.print()
+moves = ["f4", "e5", "fxe5", "f6", "d4", "fxe5","dxe5"]
+for i in moves:
+    print(board.move(i))
+    board.print()
